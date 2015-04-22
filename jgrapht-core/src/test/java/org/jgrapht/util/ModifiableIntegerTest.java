@@ -18,6 +18,7 @@ public class ModifiableIntegerTest
     double d1 = 1.0;
     float f1 = 1.0f;
     long l1 = 1L;
+    ModifiableInteger mi = new ModifiableInteger();
     ModifiableInteger mi0 = new ModifiableInteger(i0);
     ModifiableInteger mi00 = new ModifiableInteger(i0);
     ModifiableInteger mi1 = new ModifiableInteger(i1);
@@ -36,28 +37,29 @@ public class ModifiableIntegerTest
             Integer a = r.nextInt();
             Integer b = r.nextInt();
             equalsAndHashCodePUT(a, b);
+            equalsAndHashCodePUT(a, a);
         }
     }
 
     public void testincrement()
     {
-        mi0.setValue(i1);
-        mi0.increment();
-        assertEquals(i1 + 1, mi0.getValue());
+        mi.setValue(i1);
+        mi.increment();
+        assertEquals(i1 + 1, mi.getValue());
     }
 
 
 
     public void setGetPUT(int a){
-        mi0.setValue(a);
-        assertEquals(a, mi0.getValue());
+        mi.setValue(a);
+        assertEquals(a, mi.getValue());
     }
 
     public void testdecrement()
     {
-        mi0.setValue(i1);
-        mi0.decrement();
-        assertEquals(i1 - 1, mi0.getValue());
+        mi.setValue(i1);
+        mi.decrement();
+        assertEquals(i1 - 1, mi.getValue());
     }
 
     public void testcompareTo1()
