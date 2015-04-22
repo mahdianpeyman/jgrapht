@@ -1,4 +1,5 @@
 
+
 package org.jgrapht.util;
 
 import java.util.*;
@@ -11,28 +12,28 @@ public class ModifiableIntegerTest
 {
     //~ Methods ----------------------------------------------------------------
 
-    Integer i0 = 0;
-    Integer i1 = 1;
+    int i0 = 0;
+    int i1 = 1;
     ModifiableInteger mi0 = new ModifiableInteger(0);
 
     public void testsetGetValue()
     {
-        a.setValue(i1);
-        assertEquals(i1, a.getValue());
+        mi0.setValue(i1);
+        assertEquals(i1, mi0.getValue());
     }
 
     public void testincrement()
     {
-        a.setValue(i1);
-        a.increment();
-        assertEquals(i1 + 1, a.getValue());
+        mi0.setValue(i1);
+        mi0.increment();
+        assertEquals(i1 + 1, mi0.getValue());
     }
 
     public void testdecrement()
     {
-        a.setValue(i1);
-        a.decrement();
-        assertEquals(i1 - 1, a.getValue());
+        mi0.setValue(i1);
+        mi0.decrement();
+        assertEquals(i1 - 1, mi0.getValue());
     }
     
 
