@@ -55,6 +55,7 @@ public class GraphReaderTest
     //~ Instance fields --------------------------------------------------------
 
     String _unweighted = "p 3\ne 1 2\ne 1 3\n";
+    String _unweighted1 = "p 3\ne 1 2\ne 1 3\ne 1 2\ne 1 3\n";
     String _weighted = "p 3\ne 1 2 .5\ne 1 3 7\n";
 
     //~ Methods ----------------------------------------------------------------
@@ -86,6 +87,32 @@ public class GraphReaderTest
         } catch (IOException e) {
         }
     }
+
+    public void testGraphReader1()
+    {
+        GraphReader<Integer, DefaultEdge> reader;
+        try {
+            reader =
+                new GraphReader<Integer, DefaultEdge>(
+                    new StringReader(_unweighted1));
+            Graph<Integer, DefaultEdge> g =
+                new SimpleGraph<Integer, DefaultEdge>(
+                    DefaultEdge.class);
+            VertexFactory<Integer> vf = new IntVertexFactory();
+            reader.generateGraph(g, vf, null);
+            Graph<Integer, DefaultEdge> g2 =
+                new SimpleGraph<Integer, DefaultEdge>(
+                    DefaultEdge.class);
+            g2.addVertex(0);
+            g2.addVertex(1);
+            g2.addVertex(2);
+            g2.addEdge(0, 1);
+            g2.addEdge(0, 2);
+            assertEquals(g2.toString(), g.toString());
+        } catch (IOException e) {
+        }
+    }
+
 
     /**
      * .
