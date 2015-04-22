@@ -40,7 +40,7 @@ import java.util.*;
 
 import org.jgrapht.*;
 
-
+//14 new tests
 /**
  * A unit test for simple directed graph.
  *
@@ -53,6 +53,7 @@ public class SimpleDirectedGraphTest
     //~ Instance fields --------------------------------------------------------
 
     DirectedGraph<String, DefaultEdge> gEmpty;
+    DirectedGraph<String, DefaultEdge> gNull;
     private DirectedGraph<String, DefaultEdge> g1;
     private DirectedGraph<String, DefaultEdge> g2;
     private DirectedGraph<String, DefaultEdge> g3;
@@ -84,6 +85,51 @@ public class SimpleDirectedGraphTest
 
     //~ Methods ----------------------------------------------------------------
 
+    /**
+     * to test empty graph ***NEW***
+     */
+    public void testEmptyGraph()
+    {
+        init();
+
+        assertEquals(0,gEmpty.edgeSet().size());
+        assertEquals(0,gEmpty.vertexSet().size());	
+    	
+    }
+    
+    /**
+     * to test self loop graph ***NEW***
+     */
+    public void testSelfLoopGraph()
+    {
+        init();
+
+        try{
+        DefaultEdge e = g8.addEdge(v1,v1);
+        assertFalse();
+        }
+        catch (IllegalArgumentException ile) {
+            assertTrue();
+        }
+    	
+    }
+    
+    /**
+     * to test null  graph ***NEW***
+     */
+    public void testNullGraph()
+    {
+        init();
+
+        try{
+        gNull.addVertex(v1);
+        assertFalse();
+        } catch (NullPointerException ne) {
+            assertTrue();
+        }
+    	
+    }
+    
     /**
      * Class to test for boolean addEdge(V, V, E)
      */
@@ -362,7 +408,7 @@ public class SimpleDirectedGraphTest
     }
 
     /**
-     * . **NEW**
+     * . 
      */
     /**public void testIncomingEdgesOf()
     {
@@ -414,7 +460,7 @@ public class SimpleDirectedGraphTest
     }
 
     /**
-     * .  ***NEW**
+     * .  
      */
     /**public void testOutgoingEdgesOf()
     {
