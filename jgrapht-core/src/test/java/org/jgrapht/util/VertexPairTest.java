@@ -19,6 +19,7 @@ public class VertexPairTest
     VertexPair<String> vp3 = new VertexPair<String>(null , null);
     VertexPair<String> vp5 = new VertexPair<String>(s1 , null);
     VertexPair<String> vp6 = new VertexPair<String>(s2 , s3);
+    VertexPair<String> vp7 = new VertexPair<String>(s1 , s3);
 
     public void testgetFirstAndSecond()
     {
@@ -43,6 +44,24 @@ public class VertexPairTest
     public void testtoString()
     {
         assertEquals(s1+","+s2, vp1.toString());
+    }
+
+    public void testequalAndhashCode(){
+        Random r = new Random();
+        for(int i = 0 ; i < 1000 ; i++){
+            Integer a = r.nextInt();
+            Integer b = r.nextInt();
+            equalsAndHashCodePUT(a, b);
+        }
+    }
+
+    public void equalsAndHashCodePUT(Integer a, Integer b)
+    {
+
+        VertexPair<Integer> vpInt1 = new VertexPair<Integer>(a , b);
+        VertexPair<Integer> vpInt2 = new VertexPair<Integer>(vpInt1.getFirst() , vpInt1.getSecond());
+        assertTrue(vpInt1.equals(vpInt1));
+        assertEquals(vpInt1.hashCode(), vpInt2.hashCode());
     }
 
     public void testequals1()
@@ -83,6 +102,11 @@ public class VertexPairTest
     public void testequals8()
     {
         assertFalse(vp1.equals(vp6));
+    }
+
+    public void testequals9()
+    {
+        assertFalse(vp5.equals(vp7));
     }
 
     public void testhashCode1()
