@@ -115,6 +115,14 @@ public class VertexPairTest
         assertFalse(vp2.equals(vp8));
     }
 
+    public void testequals11(){
+        assertFalse(vp8.equals(vp2));
+    }
+
+    public void testequals12(){
+        assertFalse(vp7.equals(vp5));
+    }
+
     public void testhashCode1()
     {
         assertEquals(vp2.hashCode(), vp3.hashCode());
