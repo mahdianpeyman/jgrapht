@@ -19,12 +19,24 @@ public class ModifiableIntegerTest
     float f1 = 1.0f;
     long l1 = 1L;
     ModifiableInteger mi0 = new ModifiableInteger(i0);
+    ModifiableInteger mi00 = new ModifiableInteger(i0);
     ModifiableInteger mi1 = new ModifiableInteger(i1);
 
     public void testsetGetValue()
     {
-        mi0.setValue(i1);
-        assertEquals(i1, mi0.getValue());
+        Random r = new Random();
+        for(int i = 0 ; i < 1000 ; i++){
+            Integer a = r.nextInt();
+            setGetPUT(a);
+        }
+    }
+    public void testequalAndhashCode(){
+        Random r = new Random();
+        for(int i = 0 ; i < 1000 ; i++){
+            Integer a = r.nextInt();
+            Integer b = r.nextInt();
+            equalsAndHashCodePUT(a, b);
+        }
     }
 
     public void testincrement()
@@ -32,6 +44,13 @@ public class ModifiableIntegerTest
         mi0.setValue(i1);
         mi0.increment();
         assertEquals(i1 + 1, mi0.getValue());
+    }
+
+
+
+    public void setGetPUT(int a){
+        mi0.setValue(a);
+        assertEquals(a, mi0.getValue());
     }
 
     public void testdecrement()
@@ -99,6 +118,19 @@ public class ModifiableIntegerTest
     public void testtoString()
     {
         assertEquals(I1.toString(), mi1.toString());
+    }
+
+    public void testhashCode1()
+    {
+        assertEquals(mi0.hashCode(), mi00.hashCode());
+    }
+
+    public void equalsAndHashCodePUT(int a, int b)
+    {
+        ModifiableInteger mia = new ModifiableInteger(a);
+        ModifiableInteger mib = new ModifiableInteger(b);
+
+        assertEquals(mia.hashCode() == mib.hashCode(), mia.equals(mib));
     }
     
 
