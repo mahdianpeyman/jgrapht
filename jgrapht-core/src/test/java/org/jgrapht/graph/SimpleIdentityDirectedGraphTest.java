@@ -109,6 +109,7 @@ public class SimpleIdentityDirectedGraphTest
     private DirectedGraph<Holder<String>, DefaultEdge> g2;
     private DirectedGraph<Holder<String>, DefaultEdge> g3;
     private DirectedGraph<Holder<String>, DefaultEdge> g4;
+    private DirectedGraph<Holder<String>, DefaultEdge> g5;
     private DefaultEdge eLoop;
     private EdgeFactory<Holder<String>, DefaultEdge> eFactory;
     private Holder<String> v1 = new Holder<String>("v1") ;
@@ -214,12 +215,15 @@ public class SimpleIdentityDirectedGraphTest
     }
 
     /**
-     * Class to test for boolean containsEdge(Edge)
+     * Class to test for boolean containsEdge(Edge) **NEW**
      */
     public void testContainsEdgeEdge()
     {
-        init();
-
+    	init();
+        g4.addEdge(v2, v1); 
+        assertTrue(g4.containsEdge(v2, v1));
+        
+      
         // TODO Implement containsEdge().
     }
 
@@ -266,14 +270,30 @@ public class SimpleIdentityDirectedGraphTest
     }
 
     /**
-     * .
+     * . ***NEW***
      */
-    public void testEdgeSet()
+    /**public void testEdgeSet()
     {
         init();
-
+        Set<DefaultEdge> edge = g2.getAllEdges(v2, v1); 
+        
+        assertEquals(edge, g2.edgeSet());
+        
         // TODO Implement edgeSet().
-    }
+    }**/
+    
+    /**
+     * . ***NEW***
+     */
+    /**public void testEdgeSetSize()
+    {
+        init();
+        Set<DefaultEdge> edge = g2.getAllEdges(v2, v1); 
+        
+        assertEquals(edge.size(), g2.edgeSet().size());
+        
+        // TODO Implement edgeSet().
+    }**/
 
     /**
      * .
@@ -297,27 +317,46 @@ public class SimpleIdentityDirectedGraphTest
     }
 
     /**
-     * .
+     * . ***NEW***
      */
     public void testGetAllEdges()
     {
         init(); // TODO Implement getAllEdges().
+
+        Set<DefaultEdge> edges = g2.getAllEdges(v1, v2);
+        assertEquals(edges, g2.removeAllEdges(v1, v2));
     }
 
+
     /**
-     * .
+     * .  ***NEW***
      */
     public void testGetEdge()
     {
+    	
         init(); // TODO Implement getEdge().
+        g5.addVertex(v1);
+        g5.addVertex(v2);
+        DefaultEdge e = g5.addEdge(v2, v1); 
+           
+        assertEquals(e, g5.getEdge(v2, v1));
+        
+
     }
 
     /**
-     * .
+     * .  ***NEW***
      */
     public void testGetEdgeFactory()
     {
         init(); // TODO Implement getEdgeFactory().
+
+        g5.addVertex(v1);
+        g5.addVertex(v2);
+        DefaultEdge edge = g5.addEdge(v2, v1);
+        
+        assertEquals(edge, g5.getEdge(v2, v1));
+        
     }
 
     /**
@@ -400,11 +439,17 @@ public class SimpleIdentityDirectedGraphTest
     }
 
     /**
-     * Class to test for Edge removeEdge(Object, Object)
+     * Class to test for Edge removeEdge(Object, Object) ***NEW***
      */
     public void testRemoveEdgeObjectObject()
     {
         init(); // TODO Implement removeEdge().
+        g5.addVertex(v1);
+        g5.addVertex(v2);
+        DefaultEdge e = g5.addEdge(v1, v2);
+        g5.removeEdge(e);
+
+        assertFalse(g5.containsEdge(e));
     }
 
     public void testRemoveAllEdgesObjectObject()
@@ -543,6 +588,8 @@ public class SimpleIdentityDirectedGraphTest
             DefaultEdge.class);
         g4 = new SimpleIdentityDirectedGraph<Holder<String>, DefaultEdge>(
             DefaultEdge.class);
+        g5 = new SimpleIdentityDirectedGraph<Holder<String>, DefaultEdge>(
+                DefaultEdge.class);
 
         eFactory = g1.getEdgeFactory();
         eLoop = eFactory.createEdge(v1, v1);
