@@ -45,7 +45,7 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-
+//8 new tests
 /**
  * A unit test for simple directed graph when the backing map is an IdentityHashMap
  *
@@ -105,6 +105,7 @@ public class SimpleIdentityDirectedGraphTest
     //~ Instance fields --------------------------------------------------------
 
     DirectedGraph<Holder<String>, DefaultEdge> gEmpty;
+    DirectedGraph<Holder<String>,  DefaultEdge> gNull;
     private DirectedGraph<Holder<String>, DefaultEdge> g1;
     private DirectedGraph<Holder<String>, DefaultEdge> g2;
     private DirectedGraph<Holder<String>, DefaultEdge> g3;
@@ -129,6 +130,50 @@ public class SimpleIdentityDirectedGraphTest
 
     //~ Methods ----------------------------------------------------------------
 
+    /**
+     * test empty graph ***NEW***
+     */
+    public void testEmptyGraph()
+    {
+        init();
+
+        assertEquals(0,gEmpty.edgeSet().size());
+        assertEquals(0,gEmpty.vertexSet().size());	
+    
+    }
+    
+    /** 
+     * to test self loop graph ***NEW***
+     */
+    public void testSelfLoopGraph()
+    {
+        init();
+        try{
+            DefaultEdge e = g2.addEdge(v1,v1);
+            assertFalse();
+         }
+        catch (IllegalArgumentException ile) {
+                assertTrue();
+         }
+        	
+    }
+    
+    /**
+     * to test null  graph ***NEW***
+     */
+    public void testNullGraph()
+    {
+        init();
+
+        try{
+        gNull.addVertex(v1);
+        assertFalse();
+        } catch (NullPointerException ne) {
+            assertTrue();
+        }
+    	
+    }
+    
     /**
      * Class to test for boolean addEdge(V, V, E)
      */
@@ -269,31 +314,9 @@ public class SimpleIdentityDirectedGraphTest
         assertTrue(g1.containsVertex(v1)); // shows #hashCode is bypassed
     }
 
-    /**
-     * . ***NEW***
-     */
-    /**public void testEdgeSet()
-    {
-        init();
-        Set<DefaultEdge> edge = g2.getAllEdges(v2, v1); 
-        
-        assertEquals(edge, g2.edgeSet());
-        
-        // TODO Implement edgeSet().
-    }**/
+
     
-    /**
-     * . ***NEW***
-     */
-    /**public void testEdgeSetSize()
-    {
-        init();
-        Set<DefaultEdge> edge = g2.getAllEdges(v2, v1); 
-        
-        assertEquals(edge.size(), g2.edgeSet().size());
-        
-        // TODO Implement edgeSet().
-    }**/
+    
 
     /**
      * .
@@ -497,11 +520,19 @@ public class SimpleIdentityDirectedGraphTest
     }
 
     /**
-     * .
+     * . ***NEW***
      */
     public void testVertexSet()
     {
         init(); // TODO Implement vertexSet().
+        
+        
+
+        g1.addVertex(v1);
+        g1.addVertex(v2);
+        g2.addVertex(v1);
+        g2.addVertex(v2);
+        assertEquals(g1.vertexSet(), g2.vertexSet());
     }
 
     public void testReversedView()
