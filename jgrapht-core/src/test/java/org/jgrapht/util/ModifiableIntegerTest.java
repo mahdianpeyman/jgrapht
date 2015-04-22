@@ -125,6 +125,10 @@ public class ModifiableIntegerTest
         assertEquals(mi0.hashCode(), mi00.hashCode());
     }
 
+    public void testequalsNull(){
+        assertFalse(mi0.equals(null));
+    }
+
     public void equalsAndHashCodePUT(int a, int b)
     {
         ModifiableInteger mia = new ModifiableInteger(a);
