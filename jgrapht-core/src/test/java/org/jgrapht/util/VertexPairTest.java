@@ -20,6 +20,7 @@ public class VertexPairTest
     VertexPair<String> vp5 = new VertexPair<String>(s1 , null);
     VertexPair<String> vp6 = new VertexPair<String>(s2 , s3);
     VertexPair<String> vp7 = new VertexPair<String>(s1 , s3);
+    VertexPair<String> vp8 = new VertexPair<String>(null , s2);
 
     public void testgetFirstAndSecond()
     {
@@ -107,6 +108,11 @@ public class VertexPairTest
     public void testequals9()
     {
         assertFalse(vp5.equals(vp7));
+    }
+
+    public void testequals10()
+    {
+        assertFalse(vp2.equals(vp8));
     }
 
     public void testhashCode1()
