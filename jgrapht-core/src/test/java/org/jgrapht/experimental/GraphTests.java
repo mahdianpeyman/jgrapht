@@ -12,17 +12,7 @@ import junit.framework.TestCase;
 public class GraphSquareTest     
 	extends TestCase
 {
-    
-    //~ Constructors -----------------------------------------------------------
-
-    /**
-     * @see junit.framework.TestCase#TestCase(java.lang.String)
-     */
-    public GraphSquareTest(String name)
-    {
-        super(name);
-    }
-    
+        
 
     /**
      * Bug java.lang.IllegalArgumentException: must be instance of either DirectedGraph or UndirectedGraph
