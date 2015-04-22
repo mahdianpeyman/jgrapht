@@ -1,0 +1,40 @@
+
+package org.jgrapht.util;
+
+import java.util.*;
+
+import junit.framework.*;
+
+
+public class ModifiableIntegerTest
+    extends TestCase
+{
+    //~ Methods ----------------------------------------------------------------
+
+    Integer i0 = 0;
+    Integer i1 = 1;
+    ModifiableInteger mi0 = new ModifiableInteger(0);
+
+    public void testsetGetValue()
+    {
+        a.setValue(i1);
+        assertEquals(i1, a.getValue());
+    }
+
+    public void testincrement()
+    {
+        a.setValue(i1);
+        a.increment();
+        assertEquals(i1 + 1, a.getValue());
+    }
+
+    public void testdecrement()
+    {
+        a.setValue(i1);
+        a.decrement();
+        assertEquals(i1 - 1, a.getValue());
+    }
+    
+
+}
+
