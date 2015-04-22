@@ -17,6 +17,8 @@ public class VertexPairTest
     VertexPair<String> vp4 = new VertexPair<String>(s1 , s2);
     VertexPair<String> vp2 = new VertexPair<String>(null , null);
     VertexPair<String> vp3 = new VertexPair<String>(null , null);
+    VertexPair<String> vp5 = new VertexPair<String>(s1 , null);
+    VertexPair<String> vp6 = new VertexPair<String>(s2 , s3);
 
     public void testgetFirstAndSecond()
     {
@@ -71,6 +73,16 @@ public class VertexPairTest
     public void testequals6()
     {
         assertTrue(vp2.equals(vp3));
+    }
+
+    public void testequals7()
+    {
+        assertFalse(vp5.equals(vp3));
+    }
+
+    public void testequals8()
+    {
+        assertFalse(vp1.equals(vp6));
     }
 
     public void testhashCode1()
