@@ -70,6 +70,29 @@ public class RandomGraphGeneratorTest
         // but it generally should work.
         // assertFalse(EdgeTopologyCompare.compare(graphArray.get(1),graphArray.get(2)));
     }
+    
+    /**
+     * https://github.com/jgrapht/jgrapht/issues/60
+     * BUG: Suspected integer overflow in RandomGraphGenerator #60
+     */
+    public void testLargeSimpleDirectedGraph()
+    {
+        List<Graph<Integer, DefaultEdge>> graphArray =
+            new ArrayList<Graph<Integer, DefaultEdge>>();
+        for (int i = 0; i < 3; ++i) {
+            graphArray.add(
+                new SimpleDirectedGraph<Integer, DefaultEdge>(
+                    DefaultEdge.class));
+        }
+
+        //generateGraphs(graphArray, 50000 , 150000 );
+
+        //assertTrue(
+           // EdgeTopologyCompare.compare(graphArray.get(0), graphArray.get(1)));
+        // cannot assert false , cause it may be true once in a while (random)
+        // but it generally should work.
+        // assertFalse(EdgeTopologyCompare.compare(graphArray.get(1),graphArray.get(2)));
+    }
 
     public void testGenerateListenableUndirectedGraph()
     {

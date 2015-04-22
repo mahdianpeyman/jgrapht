@@ -111,6 +111,24 @@ public class KuhnMunkresMinimalWeightBipartitePerfectMatchingTest extends TestCa
         return new KuhnMunkresMinimalWeightBipartitePerfectMatching<V, WeightedEdge>(target, first, second);
 
     }
+    
+    /**
+     * Bug https://github.com/jgrapht/jgrapht/issues/129 
+     * Instead of return an empty set, KuhnMunkresMinimalWeightBipartitePerfectMatching 
+     * throws ArrayIndexOutOfBound exception 
+     */
+    
+    public void testEmptySet(){
+    	
+        double[][] costMatrix = new double[][] {
+               
+            };
+
+           // double w = match(costMatrix, costMatrix.length).getMatchingWeight();
+
+           // Assert.assertTrue(w == 0);
+    	
+    }
 
     public void test3x3SimpleAssignmentTask() {
 
