@@ -87,6 +87,35 @@ public class FibonacciHeapTest
         // tally should come back down to zero, or thereabouts (due to roundoff)
         assertEquals(0.0, t, 0.00001);
     }
+
+    public FibonacciHeap<Integer> getRandomFibHeapInteger(Integer size)
+    {
+        Random r = new Random();
+        FibonacciHeap<Integer> fh = new FibonacciHeap<Integer>();
+        for(int i = 0 ; i < size ; i++){
+            double d = r.nextDouble();
+            Integer s = r.nextInt();
+            FibonacciHeapNode<Integer> fn = new FibonacciHeapNode<Integer>(s);
+            fh.insert(fn, d);
+        }
+        return fh;
+    }
+
+    public void unionPUT(int size1, int size2)
+    {
+        FibonacciHeap<Integer> fb1 = getRandomFibHeapInteger(size1);
+        FibonacciHeap<Integer> fb2 = getRandomFibHeapInteger(size2);
+        FibonacciHeap<Integer> fb3 = FibonacciHeap.union(fb1, fb2);
+        double min = Math.min(fb1.min().getKey(), fb2.min().getKey());
+        assertEquals(min, fb3.min().getKey());
+    }
+
+    public void testUnion(){
+        unionPUT(1, 1);
+    }
+
+
+
 }
 
 // End FibonacciHeapTest.java
