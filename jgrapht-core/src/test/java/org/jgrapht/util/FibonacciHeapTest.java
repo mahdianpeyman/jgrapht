@@ -208,7 +208,7 @@ public class FibonacciHeapTest
         try
         {
             fh1.insert(fn1, .1);
-            fh1.decreaseKey( fn1, .0);
+            fh1.decreaseKey( fn1, 1.0);
         }catch(IllegalArgumentException e)
         {
 
