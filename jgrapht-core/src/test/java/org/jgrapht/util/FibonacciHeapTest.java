@@ -203,6 +203,16 @@ public class FibonacciHeapTest
         decreaseKeyPUT(10.0 , -10.0);
     }
 
+    public void testDecreaseKey1()
+    {
+        fh1.insert(fn1, 0.0);
+        fh1.insert(fn2, 1.0);
+        fh1.decreaseKey( fn1, -1.0);
+        assertEquals(-1.0, fh1.min().getKey());
+        fh1.decreaseKey( fn2, -10.0);
+        assertEquals(-10.0, fh1.min().getKey());
+    }
+
     public void testDecreaseKeyException()
     {
         try
