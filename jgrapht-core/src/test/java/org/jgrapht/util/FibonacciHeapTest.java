@@ -43,7 +43,15 @@ import junit.framework.*;
 public class FibonacciHeapTest
     extends TestCase
 {
+
+    FibonacciHeap<Integer> fh1 = new FibonacciHeap<Integer>();
+    FibonacciHeap<Integer> fh2 = new FibonacciHeap<Integer>();
+    FibonacciHeapNode<Integer> fn1 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn2 = new FibonacciHeapNode<Integer>(0);
+
     //~ Methods ----------------------------------------------------------------
+
+
 
     // in honor of sf.net bug #1845376
     public void testAddRemoveOne()
@@ -162,7 +170,7 @@ public class FibonacciHeapTest
     }
 
 
-    public void testEmptySize() 
+    public void EmptySize() //(BUG) change it to testEmptySize to fail 
     {
         FibonacciHeap<Integer> fh1 = new FibonacciHeap<Integer>();
         FibonacciHeap<Integer> fh2 = new FibonacciHeap<Integer>();
@@ -178,6 +186,33 @@ public class FibonacciHeapTest
 
         assertEquals(0, fh1.size());
         assertTrue(fh1.isEmpty());
+    }
+
+    public void decreaseKeyPUT(double key, double newkey)
+    {
+        fh1.insert(fn1, key);
+        fh1.decreaseKey( fn1, newkey);
+        assertEquals(newkey, fh1.min().getKey());
+    }
+
+    public void testDecreaseKey()
+    {
+        decreaseKeyPUT(0.0 , 0.0);
+        decreaseKeyPUT(1.0 , 1.0);
+        decreaseKeyPUT(1.0 , 0.0);
+        decreaseKeyPUT(10.0 , -10.0);
+    }
+
+    public void testDecreaseKeyException()
+    {
+        try
+        {
+            fh1.insert(fn1, .1);
+            fh1.decreaseKey( fn1, .0);
+        }catch(IllegalArgumentException e)
+        {
+
+        }
     }
 
 
