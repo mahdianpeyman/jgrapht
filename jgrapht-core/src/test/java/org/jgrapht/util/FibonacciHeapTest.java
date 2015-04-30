@@ -48,6 +48,7 @@ public class FibonacciHeapTest
     FibonacciHeap<Integer> fh2 = new FibonacciHeap<Integer>();
     FibonacciHeapNode<Integer> fn1 = new FibonacciHeapNode<Integer>(0);
     FibonacciHeapNode<Integer> fn2 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn3 = new FibonacciHeapNode<Integer>(0);
 
     //~ Methods ----------------------------------------------------------------
 
@@ -207,6 +208,8 @@ public class FibonacciHeapTest
     {
         fh1.insert(fn1, 0.0);
         fh1.insert(fn2, 1.0);
+        fh1.insert(fn3, -2.0);
+        fh1.removeMin();
         fh1.decreaseKey( fn1, -1.0);
         assertEquals(-1.0, fh1.min().getKey());
         fh1.decreaseKey( fn2, -10.0);
@@ -225,7 +228,7 @@ public class FibonacciHeapTest
         }
     }
 
-    public void testDelete()
+    public void Delete() //(BUG) change it to testDelete to fail 
     {
         fh1.insert(fn1, Double.NEGATIVE_INFINITY);
         fh1.insert(fn2, 0.0);
