@@ -225,6 +225,13 @@ public class FibonacciHeapTest
         }
     }
 
+    public void testDelete()
+    {
+        fh1.insert(fn1, Double.NEGATIVE_INFINITY);
+        fh1.insert(fn2, 0.0);
+        fh1.delete(fn2);
+        assertEquals(fh1.min(), fn1);
+    }
 
 
 }
