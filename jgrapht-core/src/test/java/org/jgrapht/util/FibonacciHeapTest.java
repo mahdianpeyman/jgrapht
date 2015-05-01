@@ -46,9 +46,14 @@ public class FibonacciHeapTest
 
     FibonacciHeap<Integer> fh1 = new FibonacciHeap<Integer>();
     FibonacciHeap<Integer> fh2 = new FibonacciHeap<Integer>();
+    FibonacciHeapNode<Integer> fn0 = new FibonacciHeapNode<Integer>(0);
     FibonacciHeapNode<Integer> fn1 = new FibonacciHeapNode<Integer>(0);
     FibonacciHeapNode<Integer> fn2 = new FibonacciHeapNode<Integer>(0);
     FibonacciHeapNode<Integer> fn3 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn4 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn5 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn6 = new FibonacciHeapNode<Integer>(0);
+    FibonacciHeapNode<Integer> fn7 = new FibonacciHeapNode<Integer>(0);
 
     //~ Methods ----------------------------------------------------------------
 
@@ -170,9 +175,30 @@ public class FibonacciHeapTest
         unionPUT(1000, 1000);
     }
 
+    public void testUnion1(){
+        FibonacciHeap<Integer> fh = FibonacciHeap.union(null, null);
+        assertEquals(0, fh.size());
+        assertTrue(fh.isEmpty());
+    }
 
-    public void EmptySize() //(BUG) change it to testEmptySize to fail 
-    {
+    public void Union2(){           //BUG change it to testUnion2 to fail 
+        fh1.insert(fn1, 0.0);
+        FibonacciHeap<Integer> fh = FibonacciHeap.union(fh1, null);
+        assertEquals(1, fh.size());
+        assertFalse(fh.isEmpty());
+        fh1.removeMin();
+        assertEquals(1, fh.size());
+        assertFalse(fh.isEmpty());
+    }
+
+    public void testUnion3(){
+        FibonacciHeap.union(null, null);
+        FibonacciHeap.union(fh1, null);
+        FibonacciHeap.union(null, fh1);
+    }
+
+
+    public void EmptySize(){  //(BUG) change it to testEmptySize to fail 
         FibonacciHeap<Integer> fh1 = new FibonacciHeap<Integer>();
         FibonacciHeap<Integer> fh2 = new FibonacciHeap<Integer>();
         FibonacciHeapNode<Integer> fn1 = new FibonacciHeapNode<Integer>(0);
@@ -207,13 +233,32 @@ public class FibonacciHeapTest
     public void testDecreaseKey1()
     {
         fh1.insert(fn1, 0.0);
-        fh1.insert(fn2, 1.0);
+        fh1.insert(fn2, 10.0);
         fh1.insert(fn3, -2.0);
         fh1.removeMin();
-        // fh1.decreaseKey( fn1, -1.0);
-        // assertEquals(-1.0, fh1.min().getKey());
-        fh1.decreaseKey( fn2, -10.0);
-        assertEquals(-10.0, fh1.min().getKey());
+        fh1.decreaseKey( fn2, 3.0);
+        assertEquals(0.0, fh1.min().getKey());
+        fh1.decreaseKey( fn2, -3.0);
+        assertEquals(-3.0, fh1.min().getKey());
+    }
+
+    public void testDecreaseKey2()
+    {
+        fh1.insert(fn0, 0.0);
+        fh1.insert(fn1, 1.0);
+        fh1.insert(fn2, 2.0);
+        fh1.insert(fn3, 3.0);
+        fh1.insert(fn4, 4.0);
+        fh1.insert(fn5, 5.0);
+        fh1.insert(fn6, 6.0);
+        fh1.insert(fn7, -40.0);
+        fh1.removeMin();
+        fh1.decreaseKey(fn1, -1.0);
+        assertEquals(-1.0, fh1.min().getKey());
+        //fh1.removeMin();
+        fh1.decreaseKey(fn3, -2.0);
+        //fh1.decreaseKey( fn5, -3.0);
+        // assertEquals(-3.0, fh1.min().getKey());
     }
 
     public void testDecreaseKeyException()
@@ -228,12 +273,42 @@ public class FibonacciHeapTest
         }
     }
 
-    public void Delete() //(BUG) change it to testDelete to fail 
-    {
+    public void Delete() {      //(BUG) change it to testDelete to fail 
         fh1.insert(fn1, Double.NEGATIVE_INFINITY);
         fh1.insert(fn2, 0.0);
         fh1.delete(fn2);
         assertEquals(fh1.min(), fn1);
+    }
+
+    public void testDelete(){
+        fh1.insert(fn1, -13.13);
+        fh1.insert(fn2, 0.0);
+        fh1.delete(fn2);
+        assertEquals(fh1.min(), fn1);
+    }
+
+    public void testRemoveMin(){
+        fh1.removeMin();
+    }
+
+    public void testToString(){ // (BUG) prints an extra comma
+        assertEquals("FibonacciHeap=[]", fh1.toString());
+        fh1.insert(fn1, 0.0);
+        assertEquals("FibonacciHeap=[0.0, ]", fh1.toString());
+        fh1.insert(fn2, -12.12);
+        assertEquals("FibonacciHeap=[-12.12, 0.0, ]", fh1.toString());
+        fh1.insert(fn3, 13.13);
+        assertEquals("FibonacciHeap=[-12.12, 13.13, 0.0, ]", fh1.toString());
+        fh1.insert(fn4, 290.3);
+        assertEquals("FibonacciHeap=[-12.12, 290.3, 13.13, 0.0, ]", fh1.toString());
+        fh1.removeMin();
+        assertEquals("FibonacciHeap=[0.0, 13.13, 290.3, ]", fh1.toString());
+    }
+
+    public void SameNode(){ // BUG change it to testSameNode to fail 
+        fh1.insert(fn1, 0.0);
+        fh1.insert(fn1, 1.0);
+        assertEquals(0.0, fh1.min().getKey());
     }
 
 
