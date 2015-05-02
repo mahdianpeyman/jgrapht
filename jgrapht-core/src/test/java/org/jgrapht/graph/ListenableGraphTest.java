@@ -37,6 +37,9 @@
  */
 package org.jgrapht.graph;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import junit.framework.*;
 
 import org.jgrapht.*;
@@ -71,6 +74,174 @@ public class ListenableGraphTest
 
     //~ Methods ----------------------------------------------------------------
 
+    /**
+     * Tests GraphListener listener.
+     * Adds edge with parameter edge
+     */
+    public void testGraphListenerAddEdge()
+    {
+        init();
+
+        ListenableGraph<Object, DefaultEdge> g =
+            new ListenableUndirectedGraph<Object, DefaultEdge>(
+                DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener =
+            new MyGraphListner<DefaultEdge>();
+        g.addGraphListener(listener);
+
+        String v1 = "v1";
+        String v2 = "v2";
+
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge e = new DefaultEdge();
+        e.source = v1;
+        e.target = v2; // g.addEdge(v1, v2);
+        boolean b = g.addEdge(v1, v2, e);
+        //g.removeEdge(e);
+
+        assertTrue(g.containsEdge(e));
+    }
+    
+
+    /**
+     * Tests GraphListener listener.
+     * Adds edge with parameter edge and creates a clone of the graph listener
+     */
+    public void testGraphListenerObjectClone()
+    {
+        init();
+
+        ListenableGraph<Object, DefaultEdge> g =
+            new ListenableUndirectedGraph<Object, DefaultEdge>(
+                DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener =
+            new MyGraphListner<DefaultEdge>();
+        g.addGraphListener(listener);
+        
+        ListenableGraph<Object, DefaultEdge> g2 =
+                new ListenableUndirectedGraph<Object, DefaultEdge>(
+                    DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener2 =
+                new MyGraphListner<DefaultEdge>();
+            g2.addGraphListener(listener2);
+            
+            
+        String v1 = "v1";
+        String v2 = "v2";
+
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge e = new DefaultEdge();
+        e.source = v1;
+        e.target = v2; 
+        g.addEdge(v1, v2, e);
+        
+        if(g instanceof Cloneable) {
+            try {
+				g2 = (ListenableGraph) g.getClass().getMethod("clone").invoke(g);
+				assertTrue(true);
+			} catch (Exception e1) {
+				assertFalse(true);
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        }
+   }
+    
+    /**
+     * Tests GraphListener listener.
+     * Adds edge with parameter edge and tries to remove non existant edge
+     */
+    public void testGraphListenerRemoveVertex()
+    {
+        init();
+
+        ListenableGraph<Object, DefaultEdge> g =
+            new ListenableUndirectedGraph<Object, DefaultEdge>(
+                DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener =
+            new MyGraphListner<DefaultEdge>();
+        g.addGraphListener(listener);
+        
+        ListenableGraph<Object, DefaultEdge> g2 =
+                new ListenableUndirectedGraph<Object, DefaultEdge>(
+                    DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener2 =
+                new MyGraphListner<DefaultEdge>();
+            g2.addGraphListener(listener2);
+            
+            
+        String v1 = "v1";
+        String v2 = "v2";
+        String notAddedV3 = "v3";
+
+
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge e = new DefaultEdge();
+        e.source = v1;
+        e.target = v2; 
+        g.addEdge(v1, v2, e);
+        
+        g.removeVertex(v1);
+        boolean b = g.removeVertex(notAddedV3);
+        
+        assertFalse(g.containsVertex(v1));
+        assertFalse(b);
+        
+   }
+    
+
+    
+    /**
+     * Tests GraphListener listener.
+     * Adds edge with parameter edge and creates a clone of the graph listener
+     */
+    /**public void testGraphListenerCreateGraphEdgeChangeEvent()
+    {
+        init();
+
+        ListenableGraph<Object, DefaultEdge> g =
+            new ListenableUndirectedGraph<Object, DefaultEdge>(
+                DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener =
+            new MyGraphListner<DefaultEdge>();
+        g.addGraphListener(listener);
+        
+
+            
+        String v1 = "v1";
+        String v2 = "v2";
+        String notAddedV3 = "v3";
+
+
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge e = new DefaultEdge();
+        e.source = v1;
+        e.target = v2; 
+        g.addEdge(v1, v2, e);
+        
+        Method method = ListenableGraph.getDeclaredMethod("createGraphEdgeChangeEvent", new Class[] { int ,DefaultEdge,V,V});
+        method.setAccessible(true);
+        return method.invoke(targetObject, argObjects);
+        
+        GraphEdgeChangeEvent<Object, DefaultEdge> g2 = g.createGraphEdgeChangeEvent(1,e,v1,v2);
+
+        
+        g.removeVertex(v1);
+        boolean b = g.removeVertex(notAddedV3);
+        
+        assertFalse(g.containsVertex(v1));
+        assertFalse(b);
+        
+   }**/
+    
     /**
      * Tests GraphListener listener.
      */

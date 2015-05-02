@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="jgrapht-core/src/main/java"/>
+	<classpathentry kind="src" path="jgrapht-core/src/test/java"/>
+	<classpathentry kind="src" path="jgrapht-demo/src/main/java"/>
+	<classpathentry kind="src" path="jgrapht-ext/src/main/java"/>
+	<classpathentry kind="src" path="jgrapht-ext/src/test/java"/>
+	<classpathentry kind="src" path="jgrapht-touchgraph/src/main/java"/>
+	<classpathentry kind="lib" path="jgrapht-touchgraph/3rdparty/com/touchgraph/TGGraphLayout/UNKNOWN/TGGraphLayout-UNKNOWN.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/alebios2/workspace/MP2/jgraph-5.13.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/alebios2/workspace/MP2/jgrapht-ext-0.9.0-uber.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

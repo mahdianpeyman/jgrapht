@@ -42,8 +42,8 @@ import org.jgrapht.generate.*;
 import org.jgrapht.graph.*;
 import org.jgrapht.traverse.*;
 import org.jgrapht.util.*;
-import org.junit.runner.*;
-import org.junit.runners.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * Runs all unit tests of the JGraphT library.

@@ -30,11 +30,13 @@ public class GraphSquareTest
 		g2.addEdge(0, 1);
 		g2.addEdge(0, 2);
 		
+		//test fails 
 		//Gsquare = new GraphSquare<Integer, DefaultEdge>(g2, false);
 		
-       // assertEquals(g2, Gsquare);
-
-		     
+       //assertEquals(g2, Gsquare);		     
     }
+    
+    
+    
 
 }
