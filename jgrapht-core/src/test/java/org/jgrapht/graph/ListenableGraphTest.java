@@ -107,6 +107,39 @@ public class ListenableGraphTest
 
     /**
      * Tests GraphListener listener.
+     * Adds edge with parameter edge
+     */
+    public void testGraphListenerEdgeChangeEvent()
+    {
+        init();
+
+        ListenableGraph<Object, DefaultEdge> g =
+            new ListenableUndirectedGraph<Object, DefaultEdge>(
+                DefaultEdge.class);
+        GraphListener<Object, DefaultEdge> listener =
+            new MyGraphListner<DefaultEdge>();
+        g.addGraphListener(listener);
+
+        String v1 = "v1";
+        String v2 = "v2";
+
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge e = new DefaultEdge();
+        e.source = v1;
+        e.target = v2; // g.addEdge(v1, v2);
+        boolean b = g.addEdge(v1, v2, e);
+        b = g.addEdge(v1, v2, e);
+
+        //g.removeEdge(e);
+
+        assertTrue(g.containsEdge(e));
+    }
+    
+
+    /**
+     * Tests GraphListener listener.
      * Adds edge with parameter edge and creates a clone of the graph listener
      */
     public void testGraphListenerObjectClone()
@@ -116,6 +149,10 @@ public class ListenableGraphTest
         ListenableGraph<Object, DefaultEdge> g =
             new ListenableUndirectedGraph<Object, DefaultEdge>(
                 DefaultEdge.class);
+        SimpleDirectedGraph<Object, DefaultEdge> gUnclonable =
+                new SimpleDirectedGraph<Object, DefaultEdge>(
+                    DefaultEdge.class);
+        
         GraphListener<Object, DefaultEdge> listener =
             new MyGraphListner<DefaultEdge>();
         g.addGraphListener(listener);
@@ -149,6 +186,15 @@ public class ListenableGraphTest
 				e1.printStackTrace();
 			}
         }
+        
+            try {
+				g2 = (ListenableGraph) g.getClass().getMethod("clone").invoke(gUnclonable);
+				assertFalse(true);
+			} catch (Exception e1) {
+				assertTrue(true);
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
    }
     
     /**

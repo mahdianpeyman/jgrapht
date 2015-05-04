@@ -119,7 +119,32 @@ public class SubgraphTest
             new UndirectedSubgraph<String, DefaultEdge>(
                 g,
                 vset,
-                new HashSet<DefaultEdge>(g.getAllEdges(v1, v2)));
+                new HashSet<DefaultEdge>(g.getAllEdges(v1, v1)));
+        sub =
+                new UndirectedSubgraph<String, DefaultEdge>(
+                    g,
+                    vset,
+                    new HashSet<DefaultEdge>(g.getAllEdges(v1, v2)));
+        
+        
+        g.addVertex(v4);
+        g.addVertex(v1);
+        g.addVertex(v2);
+
+        DefaultEdge edge = g.addEdge(v1, v2);
+        DefaultEdge edge2 = g.getEdgeFactory().createEdge(v1,v4);
+
+        try{
+        	g.addEdge(v2, v3, edge);
+        }
+        catch(NullPointerException e){
+        	assertTrue(true);
+        }
+        g.addEdge(v3, v1);
+        g.addEdge(v1, v4, edge2);
+        g.addEdge(v1, v4);
+
+        
         assertEquals(vset, sub.vertexSet());
         assertEquals(1, sub.edgeSet().size());
     }
