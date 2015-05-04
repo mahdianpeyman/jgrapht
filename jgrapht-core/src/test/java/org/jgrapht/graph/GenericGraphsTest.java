@@ -138,7 +138,15 @@ public class GenericGraphsTest
         EquivGraph g = new EquivGraph();
         g.addVertex(v1);
         g.addVertex(v2);
+        try{
+        g.addVertex(null);
+		assertFalse(true);
+        }catch(NullPointerException e){
+			assertTrue(true);
+		}
         g.addEdge(v1, v2, new DefaultEdge());
+        assertTrue(g.isAllowingMultipleEdges());
+        assertTrue(g.isAllowingLoops());
         assertEquals(2, g.degreeOf(v1));
         assertEquals(2, g.degreeOf(v2));
     }

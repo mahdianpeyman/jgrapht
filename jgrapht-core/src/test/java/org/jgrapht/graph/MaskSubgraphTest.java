@@ -9,17 +9,19 @@ import org.jgrapht.util.ArrayUnenforcedSet;
 public class MaskSubgraphTest 	
 extends EnhancedTestCase
 {
-	
+	  private String v1 = "v1";
+	  private String v2 = "v2";
+	  private String v3 = "V3";
+	  private String v4 = "v4";
+	  private String v5 = "v5";
+	  private String v6 = "v6";
+
 	 public void testDirectedSubgraphGraph()
 	 {
 			DirectedGraph<Object, DefaultEdge> g1 = 
 					new SimpleDirectedGraph<Object, DefaultEdge>(
 			                DefaultEdge.class);
-			  String v1 = "v1";
-			  String v2 = "v2";
-			  String v3 = "V3";
-			  String v4 = "v4";
-			  String v5 = "v5";
+
 			  DefaultEdge e = new DefaultEdge();
 			  e.source = v1;
 			  e.target = v2; 
@@ -59,6 +61,10 @@ extends EnhancedTestCase
 			  e1.source = v3;
 			  e1.target = v4;
 			  
+			  DefaultEdge e2 = new DefaultEdge();
+			  e1.source = v1;
+			  e1.target = v2;
+			  
 			 edges.add(e);
 			 //edges.add(e1);
 
@@ -71,10 +77,69 @@ extends EnhancedTestCase
 			assertEquals(edges.size(),g.outgoingEdgesOf(v1).size()); //test outgoing edges
 			assertEquals(1,g.outDegreeOf(v1)); //test outDegreeOf
 			assertEquals(1,g.degreeOf(v1)); //test degreeOf
+			assertFalse(g.containsEdge(e1));
+			assertTrue(g.containsVertex(v1));
+			assertFalse(g.containsVertex(v6));
 
-		
+
 	 
 	 }
+	 
+	    public void testUnmodifiable()
+	    {
+	    	
+	    	DirectedGraph<Object, DefaultEdge> g1 = 
+					new SimpleDirectedGraph<Object, DefaultEdge>(
+			                DefaultEdge.class);
+	   	 MaskFunctor<Object, DefaultEdge> mask =
+				 new Mask<Object, DefaultEdge>();
+	
+		 
+		MaskSubgraph<Object, DefaultEdge> sub = 
+				new MaskSubgraph<Object, DefaultEdge>(g1,mask);
+	    	try{
+	        	sub.addVertex(v1);
+	        	sub.addVertex(v2);
+	    		assertFalse(true);
+	        	}
+	        	catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{sub.addEdge(v1,v2);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{
+	            DefaultEdge e = sub.getEdgeFactory().createEdge(v1,v2);
+	            sub.addEdge(v1,v2, e);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{sub.removeAllEdges(v1,v2);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{
+	            DefaultEdge e = sub.getEdgeFactory().createEdge(v1,v2);
+	            sub.removeEdge(e);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{sub.removeEdge(v1,v2);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	        	try{sub.removeVertex(v1);
+	        	assertFalse(true);
+	        	}catch(UnsupportedOperationException e){
+	        		assertTrue(true);
+	        	}
+	    }
 	
 	
 

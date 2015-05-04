@@ -5,10 +5,7 @@ import org.jgrapht.EnhancedTestCase;
 
 import java.util.*;
 
-import org.jgrapht.*;
-import org.jgrapht.graph.SimpleIdentityDirectedGraphTest.Holder;
-import org.jgrapht.graph.SimpleIdentityDirectedGraphTest.SimpleIdentityDirectedGraph;
-import org.jgrapht.util.*;
+
 
 public class GraphUnionTest 
 	extends EnhancedTestCase
