@@ -10,7 +10,7 @@ import java.util.*;
 public class GraphUnionTest 
 	extends EnhancedTestCase
 	{
-	
+
 	 public void testGrapConstructor()
 	 {
 	DirectedGraph<Object, DefaultEdge> g1 = 
