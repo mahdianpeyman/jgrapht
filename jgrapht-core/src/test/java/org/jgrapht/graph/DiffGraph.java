@@ -166,9 +166,9 @@ public class DiffGraph {
         return adj[v];
     }
 
-    public Set setOfAdjacentVertices(int v)
+    public Set<Object> setOfAdjacentVertices(int v)
     {
-    	Set s = new HashSet<Object>();
+    	Set<Object> s = new HashSet<Object>();
     	for (int i = 0; i < adj[v].size(); i++){
     		s.add(adj[v].iterator().next());
     	}
@@ -205,16 +205,6 @@ public class DiffGraph {
             s.append(NEWLINE);
         }
         return s.toString();
-    }
-
-
-    /**
-     * Unit tests the <tt>Graph</tt> data type.
-     */
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        DiffGraph G = new DiffGraph(in);
-        StdOut.println(G);
     }
 
 }
