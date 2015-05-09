@@ -85,13 +85,8 @@ public class RandomGraphGeneratorTest
                     DefaultEdge.class));
         }
 
-        //generateGraphs(graphArray, 50000 , 150000 );
+        //generateGraphs(graphArray, 50000 , 150000 ); //integer overflow not handled
 
-        //assertTrue(
-           // EdgeTopologyCompare.compare(graphArray.get(0), graphArray.get(1)));
-        // cannot assert false , cause it may be true once in a while (random)
-        // but it generally should work.
-        // assertFalse(EdgeTopologyCompare.compare(graphArray.get(1),graphArray.get(2)));
     }
 
     public void testGenerateListenableUndirectedGraph()
